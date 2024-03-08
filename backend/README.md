@@ -1,1 +1,0 @@
-# site-kudos-board-exemplar
