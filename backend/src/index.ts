@@ -1,17 +1,19 @@
 import boardRoutes from './routes/boardRoutes';
+import cardRouter from './routes/cardRoutes';
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
 
-const prisma = new PrismaClient();
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 app.use('/', boardRoutes);
+
+// Use card routes under /boards/:boardId
+app.use('/:boardId', cardRouter);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

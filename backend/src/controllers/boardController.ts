@@ -5,10 +5,35 @@ const prisma = new PrismaClient();
 
 // GET all boards
 const getBoards = async (req: Request, res: Response) => {
+
   try {
     const boards = await prisma.board.findMany();
 
     res.status(200).json({ boards });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+// GET a single board by ID
+const getBoardById = async (req: Request, res: Response) => {
+
+  const { boardId } = req.params;
+
+  try {
+    const board = await prisma.board.findUnique({
+      where: { board_id: parseInt(boardId) },
+      include: {cards: true}
+    });
+
+    if (!board) {
+      console.log('Board not found');
+      res.status(404).json({ error: 'Board not found' });
+      return;
+    }
+
+    res.status(200).json({ board });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -53,4 +78,4 @@ const deleteBoard = async (req: Request, res: Response) => {
   }
 };
 
-export { getBoards, createBoard, deleteBoard };
+export { getBoards, createBoard, deleteBoard, getBoardById };

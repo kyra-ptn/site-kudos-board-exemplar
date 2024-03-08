@@ -21,5 +21,13 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "description": ""
+   "description": "",
+   
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+
+   }
+  
+  
+  
 }
