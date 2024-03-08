@@ -18,6 +18,8 @@ model board {
   title    String?
   category String?
   owner    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model card {
@@ -26,5 +28,7 @@ model card {
   description String?
   gif       String?
   owner     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
 }
