@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './NewBoardForm.css';
 
 const NewBoardForm = ({ onSuccess }) => {
   const [newBoardTitle, setNewBoardTitle] = useState('');
