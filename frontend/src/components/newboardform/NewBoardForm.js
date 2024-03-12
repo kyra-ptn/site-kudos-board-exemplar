@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './NewBoardForm.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./NewBoardForm.css";
 
 const NewBoardForm = ({ onSuccess, onClose }) => {
-  const [newBoardTitle, setNewBoardTitle] = useState('');
-  const [newBoardCategory, setNewBoardCategory] = useState('');
-  const [newBoardAuthor, setNewBoardAuthor] = useState('');
+  const [newBoardTitle, setNewBoardTitle] = useState("");
+  const [newBoardCategory, setNewBoardCategory] = useState("");
+  const [newBoardAuthor, setNewBoardAuthor] = useState("");
+
+  const categories = ["Recent", "Celebration", "Thank You", "Inspiration"];
 
   const createNewBoard = async () => {
     try {
       if (!newBoardTitle || !newBoardCategory || !newBoardAuthor) {
-        alert('Please fill out all fields');
+        alert("Please fill out all fields");
         return;
       }
-      await axios.post('http://localhost:3001/boards', {
+      await axios.post("http://localhost:3001/boards", {
         title: newBoardTitle,
         category: newBoardCategory,
         owner: newBoardAuthor,
@@ -21,13 +23,13 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
 
       onSuccess();
 
-      setNewBoardTitle('');
-      setNewBoardCategory('');
-      setNewBoardAuthor('');
+      setNewBoardTitle("");
+      setNewBoardCategory("");
+      setNewBoardAuthor("");
 
       onClose();
     } catch (error) {
-      console.error('Error creating a new board:', error);
+      console.error("Error creating a new board:", error);
     }
   };
 
@@ -46,23 +48,31 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
           required
         />
         <label>Category:</label>
-        <input
-          type="text"
+        <select
           value={newBoardCategory}
           onChange={(e) => setNewBoardCategory(e.target.value)}
           required
-        />
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+
         <label>Author:</label>
         <input
           type="text"
           value={newBoardAuthor}
           onChange={(e) => setNewBoardAuthor(e.target.value)}
         />
-        <button className='submit'onClick={createNewBoard}>Create Board</button>
+        <button className="submit" onClick={createNewBoard}>
+          Create Board
+        </button>
       </div>
     </div>
   );
 };
 
 export default NewBoardForm;
-

@@ -77,8 +77,8 @@ body {
 
 /* Delete Board button specific styles */
 .delete-board {
-  background-color: #1b1c57;
-  border: 1px solid #1b1c57;
+  background-color:teal;
+  border: 1px solid teal;
   text-decoration: none;
   transition-duration: 0.1s;
   color: #ffffff;
@@ -121,6 +121,25 @@ body {
     box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
       rgba(255, 255, 255, 0.25) 0 1px 0 inset;
     color: #24292e;
+}
+
+/* Category Buttons */
+
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.category-button {
+    background-color: #fafbfc;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+      rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    color: #24292e;
+    margin-left: 8px;
+    padding: 6px 16px;
 }
 
 /* Footer styles */

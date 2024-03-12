@@ -3,11 +3,13 @@ import axios from "axios";
 import "./HomePage.css";
 import NewBoardForm from "../newboardform/NewBoardForm";
 import img from "../../assets/kudoboard_logo.png";
+import Footer from "../footer/Footer";
 
 const HomePage = () => {
   const [boards, setBoards] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredCategory, setFilteredCategory] = useState("");
 
   useEffect(() => {
     // Fetch the list of boards on initial load
@@ -24,10 +26,36 @@ const HomePage = () => {
   };
 
   const renderBoards = () => {
-    const filteredBoards = boards.filter((board) =>
-    board.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-    return  filteredBoards.map((board) => (
+    let filteredBoards = boards;
+
+    // Filter by search query
+    if (searchQuery) {
+      filteredBoards = filteredBoards.filter((board) =>
+        board.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (filteredCategory) {
+      if (filteredCategory === "Recent") {
+
+        // Sort by creation date in descending order (newest first)
+        filteredBoards.sort((a, b) => {
+          const dateA = new Date(a.created_at);
+          const dateB = new Date(b.created_at);
+
+          if (dateA > dateB) return -1;
+          if (dateA < dateB) return 1;
+          return 0;
+        });
+      } else {
+        filteredBoards = filteredBoards.filter(
+          (board) => board.category === filteredCategory
+        );
+      }
+    }
+
+    return filteredBoards.map((board) => (
       <div key={board.board_id} className="board-preview">
         <img
           src={`https://picsum.photos/200/300?random=${board.board_id}`}
@@ -93,6 +121,10 @@ const HomePage = () => {
     }
   };
 
+  const handleCategoryFilter = (category) => {
+    setFilteredCategory(category);
+  };
+
   return (
     <div className="home-page">
       <header className="banner">
@@ -100,22 +132,58 @@ const HomePage = () => {
       </header>
 
       <main className="search">
-        <input 
-        type="text" 
-        placeholder="Search boards..." 
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        <input
+          type="text"
+          placeholder="Search boards..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </main>
+
+      <div className="category-buttons">
+        <button
+          className="button-common category-button"
+          onClick={() => handleCategoryFilter("")}
+        >
+          All
+        </button>
+        <button
+          className="button-common category-button"
+          onClick={() => handleCategoryFilter("Recent")}
+        >
+          Recent
+        </button>
+        <button
+          className="button-common category-button"
+          onClick={() => handleCategoryFilter("Celebration")}
+        >
+          Celebration
+        </button>
+        <button
+          className="button-common category-button"
+          onClick={() => handleCategoryFilter("Thank You")}
+        >
+          Thank You
+        </button>
+        <button
+          className="button-common category-button"
+          onClick={() => handleCategoryFilter("Inspiration")}
+        >
+          Inspiration
+        </button>
+      </div>
 
       <div className="center-button-container">
         <button className="button-common create-brd-btn" onClick={toggleForm}>
           Create a New Board
         </button>
-        {showForm && <NewBoardForm onSuccess={handleCreateSuccess} onClose={toggleForm} />}
+        {showForm && (
+          <NewBoardForm onSuccess={handleCreateSuccess} onClose={toggleForm} />
+        )}
       </div>
 
       <section className="board-grid">{renderBoards()}</section>
+      <Footer />
     </div>
   );
 };

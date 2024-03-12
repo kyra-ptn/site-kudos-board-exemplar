@@ -1,0 +1,11 @@
+footer {
+    margin-top: 150px;
+    background-color:teal;
+    color: #fff;
+    padding: 20px;
+    opacity: 0.5;
+  }
+  
+  footer p {
+    margin: 0;
+  }

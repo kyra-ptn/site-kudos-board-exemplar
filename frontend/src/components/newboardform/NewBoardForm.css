@@ -22,7 +22,7 @@
     margin-bottom: 5px;
   }
   
-  .new-board-form input {
+  .new-board-form input , select {
     width: 90%;
     padding: 8px;
     margin-bottom: 15px;
@@ -31,7 +31,7 @@
   .submit {
     width: 100%;
     padding: 10px;
-    background-color:#1b1c57;
+    background-color:teal;
     color: #fff;
     border: none;
     border-radius: 5px;
