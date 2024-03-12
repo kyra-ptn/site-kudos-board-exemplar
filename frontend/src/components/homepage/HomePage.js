@@ -7,6 +7,7 @@ import img from "../../assets/kudoboard_logo.png";
 const HomePage = () => {
   const [boards, setBoards] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     // Fetch the list of boards on initial load
@@ -23,7 +24,10 @@ const HomePage = () => {
   };
 
   const renderBoards = () => {
-    return boards.map((board) => (
+    const filteredBoards = boards.filter((board) =>
+    board.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+    return  filteredBoards.map((board) => (
       <div key={board.board_id} className="board-preview">
         <img
           src={`https://picsum.photos/200/300?random=${board.board_id}`}
@@ -96,15 +100,19 @@ const HomePage = () => {
       </header>
 
       <main className="search">
-        <input type="text" placeholder="Search boards..." />
-        <button className="search-button button-common">Search</button>
+        <input 
+        type="text" 
+        placeholder="Search boards..." 
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </main>
-      
+
       <div className="center-button-container">
         <button className="button-common create-brd-btn" onClick={toggleForm}>
           Create a New Board
         </button>
-        {showForm && <NewBoardForm onSuccess={handleCreateSuccess} />}
+        {showForm && <NewBoardForm onSuccess={handleCreateSuccess} onClose={toggleForm} />}
       </div>
 
       <section className="board-grid">{renderBoards()}</section>
