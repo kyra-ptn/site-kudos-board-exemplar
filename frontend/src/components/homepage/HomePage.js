@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./HomePage.css";
 import NewBoardForm from "../newboardform/NewBoardForm";
@@ -35,24 +36,34 @@ const HomePage = () => {
       );
     }
 
-    // Filter by category
-    if (filteredCategory) {
-      if (filteredCategory === "Recent") {
+    if (filteredCategory === "Recent") {
+      // Sort by creation date in descending order (newest first)
+      filteredBoards.sort((a, b) => {
+        const dateA = a.createdAt
+          ? new Date(a.createdAt.replace(/\s/, "T"))
+          : new Date(0);
+        const dateB = b.createdAt
+          ? new Date(b.createdAt.replace(/\s/, "T"))
+          : new Date(0);
 
-        // Sort by creation date in descending order (newest first)
-        filteredBoards.sort((a, b) => {
-          const dateA = new Date(a.created_at);
-          const dateB = new Date(b.created_at);
+        return dateB - dateA;
+      });
+    } else if (filteredCategory) {
+      filteredBoards = filteredBoards.filter(
+        (board) => board.category === filteredCategory
+      );
+    } else {
+      // Sort by creation date in ascending order (oldest first)
+      filteredBoards.sort((a, b) => {
+        const dateA = a.createdAt
+          ? new Date(a.createdAt.replace(/\s/, "T"))
+          : new Date(0);
+        const dateB = b.createdAt
+          ? new Date(b.createdAt.replace(/\s/, "T"))
+          : new Date(0);
 
-          if (dateA > dateB) return -1;
-          if (dateA < dateB) return 1;
-          return 0;
-        });
-      } else {
-        filteredBoards = filteredBoards.filter(
-          (board) => board.category === filteredCategory
-        );
-      }
+        return dateA - dateB;
+      });
     }
 
     return filteredBoards.map((board) => (
@@ -63,12 +74,9 @@ const HomePage = () => {
         />
         <h3>{board.title}</h3>
         <p>{board.category}</p>
-        <button
-          className="button-common view-board"
-          onClick={() => viewBoard(board.board_id)}
-        >
-          View Board
-        </button>
+        <Link to={`/boards/${board.board_id}`} className="button-common view-board">
+        View Board
+      </Link>
         <button
           className="button-common delete-board"
           onClick={() => deleteBoard(board.board_id)}
@@ -89,11 +97,6 @@ const HomePage = () => {
 
     // Hide the form
     setShowForm(false);
-  };
-
-  const viewBoard = (boardId) => {
-    // Logic to navigate to the detailed board view page
-    console.log(`Viewing Board ${boardId}`);
   };
 
   const deleteBoard = async (boardId) => {
