@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./CardForm.css";
 
 const CardForm = ({ boardId, onSuccess, onClose }) => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
   const [gifOptions, setGifOptions] = useState([]);
   const [selectedGifUrl, setSelectedGifUrl] = useState("");
 
-  const apiKey = "SVjCXhQIJfOWRk1Y31nD9qoguHb4w2tV";
+  const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
 
   const searchGifs = async () => {
     try {
@@ -41,6 +42,10 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
 
   const createNewCard = async () => {
     try {
+      if (!title || !description || !gif) {
+        alert("Please fill out all fields");
+        return;
+      }
       const response = await axios.post(
         `http://localhost:3001/boards/${boardId}/cards`,
         {
@@ -50,14 +55,10 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
           owner,
         }
       );
-      console.log("Response data:", response.data); // Log entire response data
 
       const newCard = response.data;
-      console.log("its me", newCard);
-      // Pass the new card to the onSuccess function
-      onSuccess(newCard);
 
-      // Reset form fields after successful card creation
+      onSuccess(newCard);
       setTitle("");
       setDescription("");
       setGif("");
@@ -95,7 +96,7 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button type="button" onClick={searchGifs}>
+        <button className="search-button" type="search" onClick={searchGifs}>
           Search
         </button>
         {gifOptions.length > 0 && (
@@ -116,7 +117,11 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
           value={gif}
           onChange={(e) => setGif(e.target.value)}
         />
-        <button type="button" onClick={handleCopyGifUrl}>
+        <button
+          className="copy-button"
+          type="button"
+          onClick={handleCopyGifUrl}
+        >
           Copy GIF URL
         </button>
         <input
@@ -125,7 +130,9 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
           value={owner}
           onChange={(e) => setOwner(e.target.value)}
         />
-        <button onClick={createNewCard}>Create Card</button>
+        <button className="submit" onClick={createNewCard}>
+          Create Card
+        </button>
       </div>
     </div>
   );

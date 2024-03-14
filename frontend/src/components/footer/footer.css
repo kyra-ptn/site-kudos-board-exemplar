@@ -4,6 +4,8 @@ footer {
     color: #fff;
     padding: 20px;
     opacity: 0.5;
+    min-height: 6vh;
+
   }
   
   footer p {

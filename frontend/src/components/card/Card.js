@@ -1,19 +1,42 @@
 // Card.js
-import React from 'react';
+import React, { useState } from "react";
+import "./Card.css";
+import axios from "axios";
 
 const Card = ({ card, onDelete }) => {
-    const { title, description, gif, owner} = card;
-  
-    return (
-      <div className="card">
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <img src={gif} alt="GIF" />
-        <p>{owner}</p>
-        <button onClick={onDelete}>Delete</button>
-      </div>
-    );
+  const { title, description, gif, owner } = card;
+  const [votes, setVotes] = useState(card.votes || 0);
+
+  console.log(card)
+  const handleUpvote = async () => {
+    try {
+      await axios.patch(
+        `http://localhost:3001/boards/${card.board_id}/cards/${card.card_id}/votes`,
+        {
+          // Send the updated votes count to the backend
+          votes: votes + 1,
+        }
+      );
+    
+      setVotes(votes + 1); // Update the local state with the new vote count
+    } catch (error) {
+      console.error("Error upvoting card:", error);
+    }
   };
-  
-  export default Card;
-  
+
+  return (
+    <div className="card">
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <img src={gif} alt="GIF" />
+      <p>{owner}</p>
+      <p>Votes: {votes}</p>
+      <button onClick={handleUpvote}>Upvote</button>
+      <button className="delete-button" onClick={onDelete}>
+        Delete
+      </button>
+    </div>
+  );
+};
+
+export default Card;

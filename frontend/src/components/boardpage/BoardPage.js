@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Card from "../card/Card";
 import CardForm from "../cardform/CardForm";
+import Footer from "../footer/Footer";
+import Header from "../header/Header";
+import "./BoardPage.css";
 
 const BoardPage = () => {
   const { boardId } = useParams();
+  const [boardTitle, setBoardTitle] = useState("");
   const [cards, setCards] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetchCards();
+    fetchBoardData();
   }, [boardId]);
 
   const fetchCards = async () => {
@@ -21,6 +26,18 @@ const BoardPage = () => {
       setCards(response.data.cards);
     } catch (error) {
       console.error("Error fetching cards:", error);
+    }
+  };
+
+  const fetchBoardData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/boards/${boardId}`
+      );
+      const title = response.data.board.title;
+      setBoardTitle(title);
+    } catch (error) {
+      console.error("Error fetching board data:", error);
     }
   };
 
@@ -40,12 +57,8 @@ const BoardPage = () => {
   };
 
   const handleCreateSuccess = (newCard) => {
-    console.log(newCard)
-    // Ensure the new card data is valid
     if (newCard && newCard.card_id) {
-      // Add the newly created card to the existing cards state
       setCards([...cards, newCard]);
-      // Hide the form
       setShowForm(false);
     } else {
       console.error("Invalid card data received:", newCard);
@@ -54,23 +67,37 @@ const BoardPage = () => {
 
   return (
     <div>
-      <h2>Board {boardId}'s Page</h2>
-      <div>
-        <button onClick={toggleForm}>Create a Card</button>
+      <Link to="/">
+
+        <span className="back-arrow"></span>
+      </Link>
+      <Header />
+      <h2> {boardTitle}</h2>
+      <div className="center-create-button">
+        <button className="create-card-btn" onClick={toggleForm}>
+          Create a Card
+        </button>
         {showForm && (
-          <CardForm boardId={boardId} onSuccess={handleCreateSuccess} onClose={toggleForm} />
+          <CardForm
+            boardId={boardId}
+            onSuccess={handleCreateSuccess}
+            onClose={toggleForm}
+          />
         )}
       </div>
 
       <div className="card-list">
         {cards.map((card) => (
-          <Card
-            key={card.card_id}
-            card={card}
-            onDelete={() => handleDelete(card.card_id)}
-          />
+          <div className="card-preview">
+            <Card
+              key={card.card_id}
+              card={card}
+              onDelete={() => handleDelete(card.card_id)}
+            />
+          </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

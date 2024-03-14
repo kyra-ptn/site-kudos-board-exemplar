@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./HomePage.css";
 import NewBoardForm from "../newboardform/NewBoardForm";
-import img from "../../assets/kudoboard_logo.png";
+import Header from '../header/Header';
 import Footer from "../footer/Footer";
 
 const HomePage = () => {
@@ -13,7 +13,6 @@ const HomePage = () => {
   const [filteredCategory, setFilteredCategory] = useState("");
 
   useEffect(() => {
-    // Fetch the list of boards on initial load
     fetchBoards();
   }, []);
 
@@ -29,7 +28,6 @@ const HomePage = () => {
   const renderBoards = () => {
     let filteredBoards = boards;
 
-    // Filter by search query
     if (searchQuery) {
       filteredBoards = filteredBoards.filter((board) =>
         board.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -37,7 +35,6 @@ const HomePage = () => {
     }
 
     if (filteredCategory === "Recent") {
-      // Sort by creation date in descending order (newest first)
       filteredBoards.sort((a, b) => {
         const dateA = a.createdAt
           ? new Date(a.createdAt.replace(/\s/, "T"))
@@ -53,7 +50,6 @@ const HomePage = () => {
         (board) => board.category === filteredCategory
       );
     } else {
-      // Sort by creation date in ascending order (oldest first)
       filteredBoards.sort((a, b) => {
         const dateA = a.createdAt
           ? new Date(a.createdAt.replace(/\s/, "T"))
@@ -92,10 +88,7 @@ const HomePage = () => {
   };
 
   const handleCreateSuccess = () => {
-    // After creating the board, fetch the updated list of boards
     fetchBoards();
-
-    // Hide the form
     setShowForm(false);
   };
 
@@ -109,13 +102,10 @@ const HomePage = () => {
       });
 
       if (response.ok) {
-        console.log(`Board ${boardId} deleted successfully.`);
-        // Update state locally to remove the deleted board
         setBoards((prevBoards) =>
           prevBoards.filter((board) => board.board_id !== boardId)
         );
       } else {
-        // Handle non-JSON response
         const text = await response.text();
         console.error(`Failed to delete Board ${boardId}.`, text);
       }
@@ -130,9 +120,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <header className="banner">
-        <img src={img} alt="Kudoboard Logo" />
-      </header>
+     <Header />
 
       <main className="search">
         <input
