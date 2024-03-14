@@ -13,7 +13,7 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
     try {
       if (!newBoardTitle || !newBoardCategory || !newBoardAuthor) {
         alert("Please fill out all fields");
-        return;
+        return; 
       }
       await axios.post("http://localhost:3001/boards", {
         title: newBoardTitle,
