@@ -7,7 +7,6 @@ const Card = ({ card, onDelete }) => {
   const { title, description, gif, owner } = card;
   const [votes, setVotes] = useState(card.votes || 0);
 
-  console.log(card)
   const handleUpvote = async () => {
     try {
       await axios.patch(

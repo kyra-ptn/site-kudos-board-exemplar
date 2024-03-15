@@ -68,7 +68,6 @@ const BoardPage = () => {
   return (
     <div>
       <Link to="/">
-
         <span className="back-arrow"></span>
       </Link>
       <Header />
