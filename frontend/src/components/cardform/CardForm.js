@@ -19,6 +19,7 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
         params: {
           api_key: apiKey,
           q: searchTerm,
+          limit: 8,
         },
       });
 
@@ -102,12 +103,15 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
         {gifOptions.length > 0 && (
           <div className="gif-options">
             {gifOptions.map((gifUrl) => (
-              <img
-                key={gifUrl}
-                src={gifUrl}
-                alt="GIF"
-                onClick={() => handleSelectGif(gifUrl)}
-              />
+              <div className="gif-container">
+                <img
+                  className="gif"
+                  key={gifUrl}
+                  src={gifUrl}
+                  alt="GIF"
+                  onClick={() => handleSelectGif(gifUrl)}
+                />
+              </div>
             ))}
           </div>
         )}

@@ -30,8 +30,7 @@ const Card = ({ card, onDelete }) => {
       <p>{description}</p>
       <img src={gif} alt="GIF" />
       <p>{owner}</p>
-      <p>Votes: {votes}</p>
-      <button onClick={handleUpvote}>Upvote</button>
+      <button className='upvote-button' onClick={handleUpvote}>Upvote: {votes}</button>
       <button className="delete-button" onClick={onDelete}>
         Delete
       </button>

@@ -63,4 +63,23 @@
     padding: 0; 
     background-color: none;
   }
+
+  .gif-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .gif-container {
+    margin: 8px;
+  }
+  
+  .gif {
+    border-radius: 8px;
+    height: 80px; 
+    width: 80px; 
+  }
   
