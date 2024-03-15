@@ -44,6 +44,55 @@ const createCardForBoard = async (req: Request, res: Response) => {
   }
 };
 
+//PATCH upvotes for a card
+const updateVotesForCard = async (req: Request, res: Response) => {
+  const { boardId, cardId } = req.params;
+  const { votes } = req.body;
+
+  try {
+    if (isNaN(votes)) {
+      return res.status(400).json({ message: 'Votes must be a number' });
+    }
+
+    const updatedCard = await prisma.card.update({
+      where: { card_id: parseInt(cardId), board_id: parseInt(boardId) },
+      data: { votes: parseInt(votes) },
+    });
+
+    if (!updatedCard) {
+      return res.status(404).json({ message: 'Card not found' });
+    }
+
+    res.status(200).json({ votes: updatedCard.votes });
+  } catch (error) {
+    console.error('Error updating votes for card:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// GET votes for a card 
+const getVotesForCard = async (req: Request, res: Response) => {
+  const { boardId, cardId } = req.params;
+
+  try {
+    const card = await prisma.card.findUnique({
+      where: { card_id: parseInt(cardId), board_id: parseInt(boardId) },
+      select: { votes: true },
+    });
+
+    if (!card) {
+      return res.status(404).json({ message: 'Card not found' });
+    }
+
+    res.status(200).json({ votes: card.votes });
+  } catch (error) {
+    console.error('Error retrieving votes for card:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
 // DELETE a card
 const deleteCard = async (req: Request, res: Response) => {
   const { boardId, cardId } = req.params;
@@ -60,4 +109,4 @@ const deleteCard = async (req: Request, res: Response) => {
   }
 };
 
-export { getCardsForBoard, createCardForBoard, deleteCard };
+export { getCardsForBoard, createCardForBoard, getVotesForCard, updateVotesForCard, deleteCard };

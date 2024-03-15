@@ -14,23 +14,24 @@ datasource db {
 }
 
 model board {
-  board_id  Int      @id @default(autoincrement())
+  board_id  Int       @id @default(autoincrement())
   title     String?
   category  String?
   owner     String?
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
   cards     card[]
 }
- 
+
 model card {
-  card_id     Int       @id @default(autoincrement())
+  card_id     Int     @id @default(autoincrement())
   title       String?
   description String?
   gif         String?
   owner       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime?  @updatedAt
-  board       board?    @relation(fields: [board_id], references: [board_id])
-  board_id    Int?
+  votes       Int?    @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  board     board?    @relation(fields: [board_id], references: [board_id])
+  board_id  Int?
 }
