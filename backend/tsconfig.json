@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2021",
-    "types": ["node", "lodash", "express"],
     "module": "commonjs",
     "outDir": "./dist", 
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings"
+    ]
   }
 }
