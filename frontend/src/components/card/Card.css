@@ -1,0 +1,52 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 300px;
+    position: relative;
+  }
+  
+  .card h3 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    margin: 10px 0;
+  }
+  
+  .card img {
+    width: 150px; 
+    height: auto; 
+  }
+  
+  .card button:hover {
+    background-color: #006666;
+  }
+  
+  .card .delete-button {
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px; 
+    background-color: teal;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .upvote-button {
+    position: absolute; 
+    bottom: 10px; 
+    left: 10px; 
+    background-color: rgb(98, 77, 104);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
