@@ -1,12 +1,12 @@
 .banner {
-    color: #fff;
-    padding: 20px;
-    font-family: "PP Neue Machina";
-    text-align: center; 
-  }
-  
-  .banner img {
-    width: 150px; 
-    height: auto; 
-    display: inline-block; 
-  }
+  color: #fff;
+  padding: 20px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.banner img {
+  width: 150px;
+  height: auto;
+  display: inline-block;
+}

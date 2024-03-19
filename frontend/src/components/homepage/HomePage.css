@@ -1,23 +1,20 @@
 body {
-  font-family: "PP Neue Machina";
+  font-family: sans-serif;
   margin: 0; /* Remove default margin */
 }
 
 /* Banner styles */
 .banner {
-    color: #fff;
-    padding: 20px;
-    font-family: "PP Neue Machina";
-    text-align: center; 
-  }
-  
-  .banner img {
-    width: 150px; 
-    height: auto; 
-    display: inline-block; 
-  }
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
-
+.banner img {
+  width: 150px;
+  height: auto;
+  display: inline-block;
+}
 
 /* Board grid styles */
 .board-grid {
@@ -33,6 +30,7 @@ body {
   padding: 15px;
   background-color: #fff;
   transition: transform 0.3s ease-in-out;
+  text-align: center;
 }
 
 .board-preview:hover {
@@ -77,7 +75,7 @@ body {
 
 /* Delete Board button specific styles */
 .delete-board {
-  background-color:teal;
+  background-color: teal;
   border: 1px solid teal;
   text-decoration: none;
   transition-duration: 0.1s;
@@ -87,59 +85,59 @@ body {
 
 /* Search and Search button specific styles */
 .search {
-    margin: 20px auto; 
-    display: flex;
-    gap: 10px;
-    max-width: 600px;
-  }
-  
-  .search input {
-    padding: 8px;
-    flex: 1;
-    height: 36px;
-    box-sizing: border-box;
-    background-color: #fafbfc;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
-      rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    color: #24292e;
-    padding: 6px 16px;
-  }
+  margin: 20px auto;
+  display: flex;
+  gap: 10px;
+  max-width: 600px;
+}
+
+.search input {
+  padding: 8px;
+  flex: 1;
+  height: 36px;
+  box-sizing: border-box;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  color: #24292e;
+  padding: 6px 16px;
+}
 
 /* Create Board button specific styles */
 
 .center-button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .create-brd-btn {
-    background-color: #fafbfc;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
-      rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    color: #24292e;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  color: #24292e;
 }
 
 /* Category Buttons */
 
 .category-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .category-button {
-    background-color: #fafbfc;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
-      rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    color: #24292e;
-    margin-left: 8px;
-    padding: 6px 16px;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  color: #24292e;
+  margin-left: 8px;
+  padding: 6px 16px;
 }
 
 /* Footer styles */
@@ -151,6 +149,6 @@ footer {
 
 @media (max-width: 768px) {
   .search {
-    max-width: 100%; 
+    max-width: 100%;
   }
 }

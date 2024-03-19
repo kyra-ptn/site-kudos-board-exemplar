@@ -1,3 +1,7 @@
+body {
+  font-family: sans-serif;
+}
+
 .new-card-form {
     position: fixed;
     top: 50%;
@@ -7,9 +11,11 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    max-width: 400px;
+    max-width: 500px;
+    height: auto;
     width: 100%;
     z-index: 1001;
+    
 }
 
 .new-card-form h2 {
@@ -17,12 +23,11 @@
   }
   
   .new-card-form label {
-    display: block;
     margin-bottom: 5px;
   }
   
   .new-card-form input , select {
-    width: 90%;
+    width: 95%;
     padding: 8px;
     margin-bottom: 15px;
   }
@@ -30,7 +35,7 @@
   .submit , .copy-button , .search-button {
     margin: 0px;
     margin-bottom: 15px;
-    width: 95%;
+    width: 98%;
     padding: 8px;
     background-color:teal;
     color: #fff;
@@ -79,7 +84,7 @@
   
   .gif {
     border-radius: 8px;
-    height: 80px; 
-    width: 80px; 
+    height: 150px; 
+    width: 150px; 
   }
   
