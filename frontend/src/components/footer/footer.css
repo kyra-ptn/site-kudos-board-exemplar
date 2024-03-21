@@ -1,10 +1,15 @@
+body {
+  font-family: sans-serif;
+}
+
 footer {
-    margin-top: 21%;
+    position: absolute;
+    margin-top: 470px;
+    width:100%;
     background-color:teal;
     color: #fff;
     padding: 20px;
     opacity: 0.5;
-   
 
   }
   

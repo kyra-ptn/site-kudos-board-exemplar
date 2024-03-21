@@ -19,7 +19,7 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
         params: {
           api_key: apiKey,
           q: searchTerm,
-          limit: 8,
+          limit: 6,
         },
       });
 

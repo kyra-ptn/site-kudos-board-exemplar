@@ -1,6 +1,10 @@
+body {
+  font-family: sans-serif;
+}
+
 .card-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   margin: 20px 0;
 }
@@ -42,7 +46,7 @@ h2 {
   text-align: center;
 }
 
-.back-arrow{
+.back-arrow {
     display: block;
     width: 1vw;
     height: 1vw;
