@@ -30,5 +30,9 @@
   "description": "",
   "prisma": {
     "schema": "./src/prisma/schema.prisma"
-  }
+  },
+  "scripts": {
+    "start": "node app.js",
+},
+
 }
