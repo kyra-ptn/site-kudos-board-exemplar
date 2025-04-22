@@ -48,7 +48,7 @@ const CardForm = ({ boardId, onSuccess, onClose }) => {
         return;
       }
       const response = await axios.post(
-        `https://site-kudos-board-backend-exemplar.onrender.com/boards/${boardId}/cards`,
+        `https://kudos-board-exemplar-bck7.onrender.com/boards/${boardId}/cards`,
         {
           title,
           description,
