@@ -7,7 +7,7 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
   const [newBoardCategory, setNewBoardCategory] = useState("");
   const [newBoardAuthor, setNewBoardAuthor] = useState("");
 
-  const categories = ["Recent", "Celebration", "Thank You", "Inspiration"];
+  const categories = ["Celebration", "Thank You", "Inspiration"];
 
   const createNewBoard = async () => {
     try {
