@@ -11,14 +11,15 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
 
   const createNewBoard = async () => {
     try {
-      if (!newBoardTitle || !newBoardCategory || !newBoardAuthor) {
-        alert("Please fill out all fields");
-        return; 
+      if (!newBoardTitle || !newBoardCategory) {
+        alert("Please fill out the Title and Category fields");
+        return;
       }
+
       await axios.post("https://site-kudos-board-exemplar-backend.onrender.com/boards", {
         title: newBoardTitle,
         category: newBoardCategory,
-        owner: newBoardAuthor,
+        owner: newBoardAuthor || "Anonymous",
       });
 
       onSuccess();
@@ -31,7 +32,7 @@ const NewBoardForm = ({ onSuccess, onClose }) => {
     } catch (error) {
       console.error("Error creating a new board:", error);
     }
-  };
+  }; // Properly close the createNewBoard function here
 
   return (
     <div className="overlay">
