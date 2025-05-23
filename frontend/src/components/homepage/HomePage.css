@@ -84,24 +84,57 @@ body {
 }
 
 /* Search and Search button specific styles */
+/* Search bar container */
 .search {
   margin: 20px auto;
   display: flex;
   gap: 10px;
   max-width: 600px;
+  align-items: center; 
 }
 
+/* Search input field */
 .search input {
-  padding: 8px;
-  flex: 1;
-  height: 36px;
+  padding: 10px;
+  flex: 1; 
+  height: 40px;
   box-sizing: border-box;
   background-color: #fafbfc;
   border: 1px solid rgba(27, 31, 35, 0.15);
   box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
     rgba(255, 255, 255, 0.25) 0 1px 0 inset;
   color: #24292e;
-  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Search and Clear buttons */
+.main-search-button,
+.clear-button {
+  flex: 0;
+  padding: 0 16px; 
+  font-size: 14px;
+  background-color: teal; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; 
+  box-sizing: border-box; 
+  line-height: 1;
+}
+
+
+/* Hover effect for buttons */
+.main-search-button:hover,
+.clear-button:hover {
+  background-color: #006666; /* Slightly darker teal on hover */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* Create Board button specific styles */

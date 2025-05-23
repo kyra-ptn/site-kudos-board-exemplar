@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./HomePage.css";
 import NewBoardForm from "../newboardform/NewBoardForm";
-import Header from '../header/Header';
+import Header from "../header/Header";
 import Footer from "../footer/Footer";
 
 const HomePage = () => {
@@ -18,7 +18,9 @@ const HomePage = () => {
 
   const fetchBoards = async () => {
     try {
-      const response = await axios.get("https://site-kudos-board-exemplar-backend.onrender.com/boards");
+      const response = await axios.get(
+        "https://site-kudos-board-exemplar-backend.onrender.com/boards"
+      );
       setBoards(response.data.boards);
     } catch (error) {
       console.error("Error fetching boards:", error);
@@ -70,9 +72,12 @@ const HomePage = () => {
         />
         <h3>{board.title}</h3>
         <p>{board.category}</p>
-        <Link to={`/boards/${board.board_id}`} className="button-common view-board">
-        View Board
-      </Link>
+        <Link
+          to={`/boards/${board.board_id}`}
+          className="button-common view-board"
+        >
+          View Board
+        </Link>
         <button
           className="button-common delete-board"
           onClick={() => deleteBoard(board.board_id)}
@@ -94,12 +99,15 @@ const HomePage = () => {
 
   const deleteBoard = async (boardId) => {
     try {
-      const response = await fetch(`https://site-kudos-board-exemplar-backend.onrender.com/boards/${boardId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://site-kudos-board-exemplar-backend.onrender.com/boards/${boardId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         setBoards((prevBoards) =>
@@ -118,9 +126,17 @@ const HomePage = () => {
     setFilteredCategory(category);
   };
 
+    const handleSearch = () => {
+    // Search logic is already handled dynamically by renderBoards
+  };
+
+  const handleClear = () => {
+    setSearchQuery(""); 
+  };
+
   return (
     <div className="home-page">
-     <Header />
+      <Header />
 
       <main className="search">
         <input
@@ -128,7 +144,16 @@ const HomePage = () => {
           placeholder="Search boards..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSearch(); // Trigger search on Enter key
+          }}
         />
+        <button className="button-common main-search-button" onClick={handleSearch}>
+          Search
+        </button>
+        <button className="button-common clear-button" onClick={handleClear}>
+          Clear
+        </button>
       </main>
 
       <div className="category-buttons">
